@@ -86,7 +86,7 @@
 
   Original files (keep these!):
   → census/2021/98-401-X2021006_English_CSV_data_Quebec.csv
-  → census/2016/98-401-X2016044_Quebec_eng_CSV.csv
+  → census/2016/98-401-X2016044_QUEBEC_English_CSV_data.csv
 
 ┌──────────────────────────────────────────────────────────────────────────────┐
 │ KEY DIFFERENCES: 2021 vs 2016                                                │

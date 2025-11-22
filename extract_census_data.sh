@@ -10,7 +10,7 @@ set -e  # Exit on error
 
 # Configuration
 CENSUS_DIR="/Users/rhoge/Documents/QGIS/Mobility/data/census"
-INPUT_2016="$CENSUS_DIR/2016/98-401-X2016044_Quebec_eng_CSV.csv"
+INPUT_2016="$CENSUS_DIR/2016/98-401-X2016044_QUEBEC_English_CSV_data.csv"
 INPUT_2021="$CENSUS_DIR/2021/98-401-X2021006_English_CSV_data_Quebec.csv"
 OUTPUT_2016="$CENSUS_DIR/2016/extracted"
 OUTPUT_2021="$CENSUS_DIR/2021/extracted"

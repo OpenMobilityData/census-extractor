@@ -7,7 +7,7 @@
 
 CENSUS_DIR="/Users/rhoge/Documents/QGIS/Mobility/data/census"
 INPUT_2021="$CENSUS_DIR/2021/98-401-X2021006_English_CSV_data_Quebec.csv"
-INPUT_2016="$CENSUS_DIR/2016/98-401-X2016044_Quebec_eng_CSV.csv"
+INPUT_2016="$CENSUS_DIR/2016/98-401-X2016044_QUEBEC_English_CSV_data.csv"
 
 # Color codes for output
 GREEN='\033[0;32m'

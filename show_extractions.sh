@@ -106,8 +106,8 @@ if [ -f "$CENSUS_DIR/2021/98-401-X2021006_English_CSV_data_Quebec.csv" ]; then
     echo "  2021 census: $original_2021"
 fi
 
-if [ -f "$CENSUS_DIR/2016/98-401-X2016044_Quebec_eng_CSV.csv" ]; then
-    original_2016=$(ls -lh "$CENSUS_DIR/2016/98-401-X2016044_Quebec_eng_CSV.csv" | awk '{print $5}')
+if [ -f "$CENSUS_DIR/2016/98-401-X2016044_QUEBEC_English_CSV_data.csv" ]; then
+    original_2016=$(ls -lh "$CENSUS_DIR/2016/98-401-X2016044_QUEBEC_English_CSV_data.csv" | awk '{print $5}')
     echo "  2016 census: $original_2016"
 fi
 
