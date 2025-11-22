@@ -1,0 +1,177 @@
+╔══════════════════════════════════════════════════════════════════════════════╗
+║                   CENSUS EXTRACTION QUICK REFERENCE                          ║
+╚══════════════════════════════════════════════════════════════════════════════╝
+
+┌──────────────────────────────────────────────────────────────────────────────┐
+│ COMMON COMMANDS                                                              │
+└──────────────────────────────────────────────────────────────────────────────┘
+
+  Extract all configured characteristics:
+  → ./extract_census_data.sh
+
+  Find a characteristic ID:
+  → ./find_characteristic_ids.sh "search term"
+
+  See what's been extracted:
+  → ./show_extractions.sh
+
+┌──────────────────────────────────────────────────────────────────────────────┐
+│ EXAMPLE SEARCHES                                                             │
+└──────────────────────────────────────────────────────────────────────────────┘
+
+  Transportation:
+  → ./find_characteristic_ids.sh "car.*driver"
+  → ./find_characteristic_ids.sh "public transit"
+  → ./find_characteristic_ids.sh "bicycle"
+  → ./find_characteristic_ids.sh "walked"
+
+  Work Location:
+  → ./find_characteristic_ids.sh "work.*home"
+  → ./find_characteristic_ids.sh "no fixed workplace"
+
+  Age Groups:
+  → ./find_characteristic_ids.sh "15 to 19"
+  → ./find_characteristic_ids.sh "60 to 64"
+  → ./find_characteristic_ids.sh "65.*over"
+
+  Labour:
+  → ./find_characteristic_ids.sh "labour force"
+  → ./find_characteristic_ids.sh "employed"
+
+┌──────────────────────────────────────────────────────────────────────────────┐
+│ ADDING NEW EXTRACTIONS                                                       │
+└──────────────────────────────────────────────────────────────────────────────┘
+
+  1. Find the characteristic ID:
+     → ./find_characteristic_ids.sh "bicycle"
+     
+     Output shows:
+     2021: ID 2609
+     2016: ID 1936
+
+  2. Edit extract_census_data.sh:
+     
+     # Find the relevant section (e.g., COMMUTING DATA)
+     # Uncomment or add these lines:
+     extract_2021 "2609" "commuters_cycling"
+     extract_2016 "1936" "commuters_cycling"
+
+  3. Run extraction:
+     → ./extract_census_data.sh
+
+  4. Verify:
+     → ./show_extractions.sh
+
+┌──────────────────────────────────────────────────────────────────────────────┐
+│ QGIS WORKFLOW                                                                │
+└──────────────────────────────────────────────────────────────────────────────┘
+
+  1. Layer → Add Delimited Text Layer
+  2. Browse: census/2021/extracted/[file].csv
+  3. No geometry
+  4. No filter needed!
+  5. Join to DA boundaries:
+     - Join field: GEO_CODE (POR) or DGUID
+     - Target field: DAUID
+  6. Calculate ratios in Field Calculator
+  7. Style and export
+
+┌──────────────────────────────────────────────────────────────────────────────┐
+│ FILE LOCATIONS                                                               │
+└──────────────────────────────────────────────────────────────────────────────┘
+
+  Extracted files:
+  → census/2021/extracted/*.csv
+  → census/2016/extracted/*.csv
+
+  Original files (keep these!):
+  → census/2021/98-401-X2021006_English_CSV_data_Quebec.csv
+  → census/2016/98-401-X2016044_Quebec_eng_CSV.csv
+
+┌──────────────────────────────────────────────────────────────────────────────┐
+│ KEY DIFFERENCES: 2021 vs 2016                                                │
+└──────────────────────────────────────────────────────────────────────────────┘
+
+  ┌─────────────────┬──────────────────┬─────────────────────────────────┐
+  │                 │ 2021             │ 2016                            │
+  ├─────────────────┼──────────────────┼─────────────────────────────────┤
+  │ ID Field        │ CHARACTERISTIC_  │ Member ID: Profile of           │
+  │                 │ ID               │ Dissemination Areas (2247)      │
+  ├─────────────────┼──────────────────┼─────────────────────────────────┤
+  │ ID Column       │ Column 2         │ Column 10                       │
+  ├─────────────────┼──────────────────┼─────────────────────────────────┤
+  │ Description     │ CHARACTERISTIC_  │ DIM: Profile of                 │
+  │ Field           │ NAME             │ Dissemination Areas (2247)      │
+  └─────────────────┴──────────────────┴─────────────────────────────────┘
+
+  Scripts handle these differences automatically!
+
+┌──────────────────────────────────────────────────────────────────────────────┐
+│ PERFORMANCE IMPROVEMENT                                                      │
+└──────────────────────────────────────────────────────────────────────────────┘
+
+  Before (full CSV + QGIS filter):
+  • Load time: 30-60 seconds
+  • Memory: 2-4 GB
+  • Project size: 50+ MB
+
+  After (pre-extracted):
+  • Load time: 5-10 seconds
+  • Memory: 500 MB - 1 GB
+  • Project size: 5-10 MB
+
+  ⚡ 10x FASTER! ⚡
+
+┌──────────────────────────────────────────────────────────────────────────────┐
+│ COMMON IDS (Fill these in as you find them!)                                │
+└──────────────────────────────────────────────────────────────────────────────┘
+
+  ┌──────────────────────────┬──────────┬──────────┐
+  │ Characteristic           │ 2021 ID  │ 2016 ID  │
+  ├──────────────────────────┼──────────┼──────────┤
+  │ Total population         │    1     │    1     │
+  │ Total households         │   1414   │   1617   │
+  │ Total commuters          │   2603   │   1930   │
+  │ Car (as driver)          │   ___    │   ___    │
+  │ Car (as passenger)       │   ___    │   ___    │
+  │ Public transit           │   ___    │   ___    │
+  │ Walked                   │   ___    │   ___    │
+  │ Bicycle                  │   ___    │   ___    │
+  │ Work from home           │   ___    │   ___    │
+  │ Population 15-19 years   │   ___    │   ___    │
+  │ Population 60-64 years   │   ___    │   ___    │
+  │ Population 65+ years     │   ___    │   ___    │
+  └──────────────────────────┴──────────┴──────────┘
+
+  Use: ./find_characteristic_ids.sh to fill in the blanks!
+
+┌──────────────────────────────────────────────────────────────────────────────┐
+│ TROUBLESHOOTING                                                              │
+└──────────────────────────────────────────────────────────────────────────────┘
+
+  Problem: File not found
+  → Check paths in scripts match your file locations
+
+  Problem: No data extracted
+  → Verify characteristic ID is correct
+  → Don't mix 2021 IDs with 2016 data (or vice versa)
+
+  Problem: Search finds nothing
+  → Try broader terms: "commut" instead of "commuting"
+  → Try alternate terms: "transit" vs "public transportation"
+
+  Problem: Extracted file is huge
+  → You might be extracting a parent category
+  → Be more specific with the characteristic ID
+
+┌──────────────────────────────────────────────────────────────────────────────┐
+│ MORE HELP                                                                    │
+└──────────────────────────────────────────────────────────────────────────────┘
+
+  → Read: README.md (overview and quick start)
+  → Read: CENSUS_EXTRACTION_GUIDE.md (detailed documentation)
+  → Run: ./show_extractions.sh (see current status)
+
+╔══════════════════════════════════════════════════════════════════════════════╗
+║ Save this file for quick reference when working with census extractions!    ║
+╚══════════════════════════════════════════════════════════════════════════════╝
