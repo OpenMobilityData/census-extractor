@@ -1,6 +1,11 @@
 # Census Data Extraction Toolkit
 
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![Shell Script](https://img.shields.io/badge/shell-bash-green.svg)](https://www.gnu.org/software/bash/)
+
 A set of shell scripts to efficiently extract specific characteristics from Statistics Canada census data for use in QGIS.
+
+**Part of the [OpenMobilityData](https://github.com/OpenMobilityData) project.**
 
 ## The Problem
 

@@ -77,8 +77,8 @@ gh auth login
 ```bash
 cd ~/Documents/QGIS/Mobility/census-extractor
 
-# Create GitHub repo and push
-gh repo create census-extractor \
+# Create GitHub repo in OpenMobilityData organization and push
+gh repo create OpenMobilityData/census-extractor \
   --public \
   --source=. \
   --description="Shell scripts to efficiently extract specific characteristics from Statistics Canada census data for QGIS analysis" \
@@ -90,7 +90,7 @@ gh repo create census-extractor \
 ### Option B: Using GitHub Web Interface
 
 **1. Create repository on GitHub:**
-- Go to https://github.com/new
+- Go to https://github.com/organizations/OpenMobilityData/repositories/new
 - Repository name: `census-extractor`
 - Description: "Shell scripts to efficiently extract specific characteristics from Statistics Canada census data for QGIS analysis"
 - Public repository
@@ -105,14 +105,12 @@ GitHub will show you commands. Use these:
 cd ~/Documents/QGIS/Mobility/census-extractor
 
 # Add GitHub as remote
-git remote add origin https://github.com/YOUR_USERNAME/census-extractor.git
+git remote add origin https://github.com/OpenMobilityData/census-extractor.git
 
 # Push to GitHub
 git branch -M main
 git push -u origin main
 ```
-
-Replace `YOUR_USERNAME` with your GitHub username.
 
 ---
 
@@ -377,7 +375,7 @@ make install
 ### Git push fails with authentication error
 ```bash
 # Use SSH instead of HTTPS
-git remote set-url origin git@github.com:YOUR_USERNAME/census-extractor.git
+git remote set-url origin git@github.com:OpenMobilityData/census-extractor.git
 
 # Or authenticate with gh
 gh auth login
